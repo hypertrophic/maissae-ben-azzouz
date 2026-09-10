@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Maissae Ben Azzouz — Portfolio</title>
+  <meta name="description" content="Maissae Ben Azzouz, artiste visuelle et designer. Art numérique, design de produit et peinture — INBA Tétouan." />
+  <meta property="og:title" content="Maissae Ben Azzouz — Portfolio" />
+  <meta property="og:description" content="Artiste visuelle et designer. Art numérique, design de produit et peinture." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Maissae Ben Azzouz — Portfolio" />
+  <meta name="twitter:description" content="Artiste visuelle et designer. Art numérique, design de produit et peinture." />
+  <meta name="twitter:image" content="assets/og.jpg" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preload" href="assets/fonts/syne-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/outfit-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" as="image" href="assets/portrait-800.jpg" imagesrcset="assets/portrait-800.jpg 800w, assets/portrait.jpg 1100w" imagesizes="(max-width: 980px) 90vw, 42vw" />
+  <link rel="stylesheet" href="assets/fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="paint-trail" aria-hidden="true"></canvas>
+  <div id="brush" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <a class="logo" href="#top">Maissae</a>
+    <nav>
+      <a href="#pratiques">Pratiques</a>
+      <a href="#galerie">Œuvres</a>
+      <a href="#contact">Contact</a>
+      <button type="button" class="brush-toggle" id="brush-toggle" hidden aria-pressed="true" title="Activer ou désactiver le pinceau">Pinceau</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Artiste visuelle &amp; designer · INBA Tétouan</p>
+        <h1>
+          <span>Maissae</span>
+          <span class="gold">Ben Azzouz</span>
+        </h1>
+        <p class="lede">
+          Transcender le silence des objets délaissés — là où le métal
+          rencontre l'humain, et devient un miroir de nos sens.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#pratiques">Le travail</a>
+          <a class="btn ghost" href="#contact">Écrire</a>
+        </div>
+      </div>
+      <figure class="hero-portrait">
+        <div class="portrait-frame">
+          <img
+            src="assets/portrait-800.jpg"
+            srcset="assets/portrait-800.jpg 800w, assets/portrait.jpg 1100w"
+            sizes="(max-width: 980px) 90vw, 42vw"
+            width="800"
+            height="751"
+            alt="Maissae Ben Azzouz dans l'atelier"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <figcaption>Atelier · Tétouan</figcaption>
+      </figure>
+    </section>
+
+    <section class="about reveal">
+      <p class="eyebrow">À propos</p>
+      <p class="about-text">
+        <strong>Maissae Ben Azzouz</strong> travaille à l'intersection de la matière brute
+        et du dialogue sensoriel. En Master à l'INBA de Tétouan, elle donne une seconde voix
+        aux composants automobiles — par le design, l'art numérique et la peinture.
+      </p>
+    </section>
+
+    <section id="pratiques" class="practices">
+      <div class="section-head reveal">
+        <p class="eyebrow">Trois territoires</p>
+        <h2>Pratiques</h2>
+      </div>
+
+      <div class="cards" id="cards">
+        <button type="button" class="card reveal" data-filter="numerique" aria-pressed="false">
+          <div class="card-media">
+            <img src="assets/cards/numerique.jpg" width="720" height="684" alt="" loading="lazy" decoding="async" />
+            <span class="card-year">2024 — 2026</span>
+          </div>
+          <div class="card-body">
+            <h3>Art numérique</h3>
+            <p>Installations interactives. Le spectateur insuffle une âme au métal.</p>
+            <span class="card-cta">Voir</span>
+          </div>
+        </button>
+
+        <button type="button" class="card reveal" data-filter="design" aria-pressed="false">
+          <div class="card-media">
+            <img src="assets/cards/design.jpg" width="516" height="720" alt="" loading="lazy" decoding="async" />
+            <span class="card-year">2023 — 2024</span>
+          </div>
+          <div class="card-body">
+            <h3>Design de produit</h3>
+            <p>Ressorts, bielles, jantes : la ferraille renaît en objet.</p>
+            <span class="card-cta">Voir</span>
+          </div>
+        </button>
+
+        <button type="button" class="card reveal" data-filter="peinture" aria-pressed="false">
+          <div class="card-media">
+            <img src="assets/cards/peinture.jpg" width="438" height="570" alt="" loading="lazy" decoding="async" />
+            <span class="card-year">Empreinte</span>
+          </div>
+          <div class="card-body">
+            <h3>Peinture</h3>
+            <p>Gravure, encre et couleur. Le papier retient la machine.</p>
+            <span class="card-cta">Voir</span>
+          </div>
+        </button>
+      </div>
+      <p class="swipe-hint" id="hint-cards">Glisser →</p>
+
+      <aside class="practice-note" id="practice-note" hidden>
+        <p></p>
+      </aside>
+    </section>
+
+    <section id="galerie" class="gallery-section">
+      <div class="section-head reveal">
+        <p class="eyebrow">Sélection</p>
+        <div class="gallery-title-row">
+          <h2>Œuvres</h2>
+          <button type="button" class="filter-reset" id="filter-reset" hidden>Tout</button>
+        </div>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <figure class="tile" data-cat="numerique" data-video="https://youtu.be/Eg3XnEf3ALM">
+          <img src="assets/gallery/visite-squelette.jpg" width="900" height="506" alt="Installation La Visite, projection d'un squelette" loading="lazy" decoding="async" />
+          <figcaption>
+            <strong>La Visite</strong>
+            <span>Numérique · 2026</span>
+          </figcaption>
+        </figure>
+
+        <figure class="tile" data-cat="design">
+          <img src="assets/gallery/chaise.jpg" width="442" height="900" alt="Chaise en amortisseur et disque de frein" loading="lazy" decoding="async" />
+          <figcaption>
+            <strong>Chaise</strong>
+            <span>Design · 2023</span>
+          </figcaption>
+        </figure>
+
+        <figure class="tile" data-cat="peinture">
+          <img src="assets/gallery/gravure-01.jpg" width="438" height="570" alt="Gravure de joints de culasse" loading="lazy" decoding="async" />
+          <figcaption>
+            <strong>Empreintes</strong>
+            <span>Peinture · 2024</span>
+          </figcaption>
+        </figure>
+
+        <figure class="tile" data-cat="numerique" data-video="https://youtube.com/shorts/rl9Cxlws8oI">
+          <img src="assets/gallery/dialogue-projection.jpg" width="900" height="462" alt="Projection interactive Dialogue avec le Joint Culasse" loading="lazy" decoding="async" />
+          <figcaption>
+            <strong>Dialogue</strong>
+            <span>Numérique · 2024</span>
+          </figcaption>
+        </figure>
+
+        <figure class="tile" data-cat="design">
+          <img src="assets/gallery/temps-mecanique.jpg" width="646" height="900" alt="Horloge Le Temps Mécanique" loading="lazy" decoding="async" />
+          <figcaption>
+            <strong>Le Temps Mécanique</strong>
+            <span>Design · 2023</span>
+          </figcaption>
+        </figure>
+
+        <figure class="tile" data-cat="peinture">
+          <img src="assets/gallery/dialogue-serie.jpg" width="900" height="457" alt="Série de gravures" loading="lazy" decoding="async" />
+          <figcaption>
+            <strong>Série de tirages</strong>
+            <span>Peinture · 2024</span>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="swipe-hint" id="hint-gallery">Glisser →</p>
+    </section>
+  </main>
+
+  <footer id="contact" class="contact">
+    <p class="eyebrow">Dialogue</p>
+    <h2>Contact</h2>
+    <ul class="contact-list">
+      <li>
+        <span>E-mail</span>
+        <a href="mailto:benazzouzmaissae27@gmail.com">benazzouzmaissae27@gmail.com</a>
+      </li>
+      <li>
+        <span>Instagram</span>
+        <a href="https://instagram.com/maissaeart" target="_blank" rel="noopener noreferrer">@Maissaeart</a>
+      </li>
+      <li>
+        <span>WhatsApp</span>
+        <a href="https://wa.me/212639542100" target="_blank" rel="noopener noreferrer">+212 6 39 54 21 00</a>
+      </li>
+      <li>
+        <span>Téléphone</span>
+        <a href="tel:+212639542100">+212 6 39 54 21 00</a>
+      </li>
+    </ul>
+    <p class="copyright">© 2026 Maissae Ben Azzouz</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button type="button" class="lightbox-close" aria-label="Fermer">&times;</button>
+    <figure>
+      <img alt="" width="1100" height="800" />
+      <figcaption>
+        <p class="lb-title"></p>
+        <p class="lb-meta"></p>
+        <a class="lb-link" target="_blank" rel="noopener noreferrer" hidden>Voir la vidéo</a>
+      </figcaption>
+    </figure>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
