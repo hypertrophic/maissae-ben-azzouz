@@ -169,7 +169,7 @@ if (!wantFinePointer) {
 } else {
   brushToggle.hidden = false;
   const ctx = canvas.getContext("2d", { alpha: true });
-  let w, h, lastX, lastY, lastT, pts = [], raf = 0, enabled = true;
+  let w, h, lastX, lastY, midX, midY, raf = 0, idle = 0, enabled = true;
 
   function resize() {
     w = canvas.width = window.innerWidth;
@@ -182,66 +182,61 @@ if (!wantFinePointer) {
     raf = 0;
     if (!enabled) {
       ctx.clearRect(0, 0, w, h);
-      pts.length = 0;
       return;
     }
-    ctx.clearRect(0, 0, w, h);
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    for (let i = pts.length - 1; i >= 0; i--) {
-      const p = pts[i];
-      p.life -= 0.024;
-      if (p.life <= 0) {
-        pts.splice(i, 1);
-        continue;
-      }
-      ctx.strokeStyle = `rgba(232, 185, 35, ${0.38 * p.life})`;
-      ctx.lineWidth = p.w * p.life;
-      ctx.beginPath();
-      ctx.moveTo(p.x0, p.y0);
-      ctx.lineTo(p.x, p.y);
-      ctx.stroke();
-    }
-    if (pts.length > 90) pts.splice(0, pts.length - 90);
-    if (pts.length) raf = requestAnimationFrame(tick);
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.fillStyle = "rgba(0,0,0,0.08)";
+    ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = "source-over";
+    idle += 1;
+    if (idle < 55) raf = requestAnimationFrame(tick);
   }
 
   document.addEventListener("mousemove", (e) => {
     if (!enabled) return;
     brush.style.opacity = "1";
     brush.style.transform = `translate(${e.clientX - 2}px, ${e.clientY - 8}px)`;
-    const now = performance.now();
+    const x = e.clientX;
+    const y = e.clientY;
     if (lastX != null) {
-      const dt = Math.max(8, now - lastT);
-      const speed = Math.min(1.6, Math.hypot(e.clientX - lastX, e.clientY - lastY) / dt);
-      pts.push({
-        x: e.clientX,
-        y: e.clientY,
-        x0: lastX,
-        y0: lastY,
-        life: 1,
-        w: 1.1 + speed * 6,
-      });
+      const mx = (lastX + x) / 2;
+      const my = (lastY + y) / 2;
+      ctx.globalCompositeOperation = "source-over";
+      ctx.strokeStyle = "rgba(232, 185, 35, 0.4)";
+      ctx.lineWidth = 2.2;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      if (midX == null) {
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(mx, my);
+      } else {
+        ctx.moveTo(midX, midY);
+        ctx.quadraticCurveTo(lastX, lastY, mx, my);
+      }
+      ctx.stroke();
+      midX = mx;
+      midY = my;
+      idle = 0;
       if (!raf) raf = requestAnimationFrame(tick);
     }
-    lastX = e.clientX;
-    lastY = e.clientY;
-    lastT = now;
+    lastX = x;
+    lastY = y;
   });
 
   document.addEventListener("mouseleave", () => {
     brush.style.opacity = "0";
-    lastX = lastY = null;
+    lastX = lastY = midX = midY = null;
   });
 
   paintApi = {
     setEnabled(on) {
       enabled = on;
-      if (!on && raf) {
-        cancelAnimationFrame(raf);
+      lastX = lastY = midX = midY = null;
+      if (!on) {
+        if (raf) cancelAnimationFrame(raf);
         raf = 0;
         ctx.clearRect(0, 0, w, h);
-        pts.length = 0;
       }
     },
   };
