@@ -115,11 +115,11 @@ a { color: inherit; }
 
 .hero {
   display: grid;
-  grid-template-columns: 1.05fr 0.9fr;
-  gap: clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.9fr);
+  gap: clamp(1.75rem, 5vw, 4.5rem);
   align-items: center;
-  padding: 2.5rem var(--pad) 5rem;
-  min-height: min(88vh, 820px);
+  padding: 1.5rem var(--pad) 3.5rem;
+  min-height: calc(100svh - 4.5rem);
 }
 
 .eyebrow {
@@ -182,28 +182,41 @@ h2 { font-size: clamp(1.55rem, 3vw, 2.4rem); }
 .hero-copy > *:nth-child(3) { animation-delay: .28s; }
 .hero-copy > *:nth-child(4) { animation-delay: .4s; }
 
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
 .hero-portrait {
   position: relative;
+  min-width: 0;
   animation: rise 1.05s .18s var(--ease) both;
 }
 .portrait-frame {
   position: relative;
   border-radius: 2px;
+  margin: 0 16px 16px 0;
 }
 .portrait-frame::after {
   content: "";
   position: absolute;
-  inset: 14px -14px -14px 14px;
+  top: 14px;
+  left: 14px;
+  width: 100%;
+  height: 100%;
   border: 1px solid var(--gold);
   pointer-events: none;
+  z-index: 2;
   animation: frameIn 1.1s .5s var(--ease) both;
 }
 .portrait-frame img {
   position: relative;
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: min(72svh, 620px);
   object-fit: cover;
-  object-position: 50% 18%;
+  object-position: 50% 14%;
   filter: contrast(1.05) saturate(0.18);
   z-index: 1;
 }
@@ -480,15 +493,21 @@ h2 { font-size: clamp(1.55rem, 3vw, 2.4rem); }
 
   .hero {
     grid-template-columns: 1fr;
-    min-height: auto;
+    min-height: 0;
     padding-top: 1.2rem;
-    padding-bottom: 3rem;
+    padding-bottom: 2.5rem;
     gap: 1.6rem;
   }
-  .portrait-frame::after { inset: 10px -10px -10px 10px; }
+  .portrait-frame {
+    margin: 0 12px 12px 0;
+    max-width: 420px;
+  }
+  .portrait-frame::after {
+    top: 10px;
+    left: 10px;
+  }
   .portrait-frame img {
-    aspect-ratio: 3 / 4;
-    max-height: 58vh;
+    height: min(52svh, 480px);
     margin: 0 auto;
   }
 
