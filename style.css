@@ -242,14 +242,17 @@ h2 { font-size: clamp(1.55rem, 3vw, 2.4rem); }
 .about {
   border-top: 1px solid var(--line);
   background: var(--bg-2);
-  padding-top: 3.2rem;
-  padding-bottom: 3.2rem;
+  padding-top: 3.4rem;
+  padding-bottom: 3.4rem;
+  text-align: center;
 }
+.about .eyebrow { margin-bottom: 1.1rem; }
 .about-text {
-  max-width: 46rem;
+  max-width: 58rem;
+  margin: 0 auto;
   color: var(--muted);
-  font-size: clamp(1.02rem, 1.8vw, 1.18rem);
-  line-height: 1.65;
+  font-size: clamp(1.08rem, 2vw, 1.32rem);
+  line-height: 1.7;
 }
 .about strong { color: var(--ink); font-weight: 500; }
 
@@ -415,18 +418,21 @@ h2 { font-size: clamp(1.55rem, 3vw, 2.4rem); }
   padding-top: 2.6rem;
   padding-bottom: 2rem;
 }
-.contact-top {
+.contact-top { margin-bottom: 1.6rem; }
+.contact h2 { margin-bottom: 0; }
+.footer-bar {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 1.5rem;
-  margin-bottom: 1.8rem;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 1.15rem;
+  flex-wrap: wrap;
 }
-.contact h2 { margin-bottom: 0; }
 .credit {
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.78rem;
   text-align: right;
+  margin-left: auto;
 }
 .credit a {
   color: var(--gold);
@@ -602,9 +608,9 @@ h2 { font-size: clamp(1.55rem, 3vw, 2.4rem); }
   }
   .hero-actions { width: 100%; }
   .btn { flex: 1; justify-content: center; }
-  .contact-top { flex-direction: column; align-items: flex-start; }
-  .credit { text-align: left; }
   .contact-list { grid-template-columns: 1fr 1fr; }
+  .footer-bar { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+  .credit { text-align: left; margin-left: 0; }
   .nav nav { gap: 0.85rem; }
   .nav nav a { font-size: 0.64rem; letter-spacing: 0.08em; }
 }
