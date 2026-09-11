@@ -192,10 +192,20 @@ if (!wantFinePointer) {
     if (idle < 55) raf = requestAnimationFrame(tick);
   }
 
+  const CLICKABLE = "a, button, .tile, .filter-reset, .lightbox-close";
+
   document.addEventListener("mousemove", (e) => {
     if (!enabled) return;
+    const onBtn = Boolean(e.target.closest && e.target.closest(CLICKABLE));
+    brush.classList.toggle("is-bucket", onBtn);
     brush.style.opacity = "1";
-    brush.style.transform = `translate(${e.clientX - 2}px, ${e.clientY - 8}px)`;
+    brush.style.transform = onBtn
+      ? `translate(${e.clientX - 7}px, ${e.clientY - 6}px)`
+      : `translate(${e.clientX - 2}px, ${e.clientY - 8}px)`;
+    if (onBtn) {
+      lastX = lastY = midX = midY = null;
+      return;
+    }
     const x = e.clientX;
     const y = e.clientY;
     if (lastX != null) {
