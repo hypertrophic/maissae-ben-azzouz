@@ -32,7 +32,12 @@ body.has-native-cursor * { cursor: auto; }
 
 img { max-width: 100%; display: block; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: none; }
-a { color: inherit; }
+a, .tile, .filter-reset, .lightbox-close { color: inherit; cursor: none; }
+body.has-native-cursor a,
+body.has-native-cursor button,
+body.has-native-cursor .tile,
+body.has-native-cursor .filter-reset,
+body.has-native-cursor .lightbox-close { cursor: pointer; }
 ::selection { background: var(--gold); color: #111; }
 
 .grain {
@@ -65,6 +70,9 @@ a { color: inherit; }
   transition: opacity .25s;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,.5));
   will-change: transform;
+}
+#brush.is-bucket {
+  background-image: url("assets/bucket.svg");
 }
 
 .nav {
